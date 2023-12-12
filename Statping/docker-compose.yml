@@ -1,0 +1,20 @@
+version: '2.3'
+
+services:
+  statping:
+    container_name: statping
+    image: adamboutcher/statping-ng:latest
+    restart: always
+    volumes:
+      - /home/opu/docker/statping/data:/app
+    environment:
+      DB_CONN: sqlite
+    ports:
+      - 8080:8080
+
+volumes:
+  statping_data:
+networks:
+   default:
+      external: true
+      name: caddy

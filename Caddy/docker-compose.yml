@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  caddy:
+    image: technoguyfication/caddy-cloudflare:latest
+    restart: unless-stopped
+    environment:
+    - ACME_EMAIL="me@example.com"
+    - CLOUDFLARE_API_TOKEN=
+    - ACME_AGREE=true
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - /home/opu/docker/caddy/data:/data
+    - /home/opu/docker/caddy/config:/config
+    - /home/opu/docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+
+volumes:
+  data:
+  config:
+networks:
+  default:
+    external: true
+    name: caddy

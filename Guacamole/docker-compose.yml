@@ -1,0 +1,16 @@
+version: "2"
+services:
+  guacamole:
+    image: jwetzell/guacamole
+    container_name: guacamole
+    volumes:
+      - postgres:/config
+    ports:
+      - 8080:8080
+volumes:
+  postgres:
+    driver: local
+networks:
+  default:
+    external: true
+    name: caddy

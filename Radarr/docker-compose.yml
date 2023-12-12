@@ -1,0 +1,20 @@
+version: "2.1"
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Dhaka
+    volumes:
+      - /home/opu/docker/radarr/config:/config
+      - /path/to/movies:/movies #optional
+      - /path/to/downloadclient-downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+networks:
+   default:
+      external: true
+      name: caddy
