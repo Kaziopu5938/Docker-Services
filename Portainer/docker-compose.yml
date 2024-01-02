@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+    portainer-ce:
+        image: 'portainer/portainer-ce:latest'
+        volumes:
+            - '/home/opu/docker/portainer/data:/data'
+            - '/var/run/docker.sock:/var/run/docker.sock'
+        restart: always
+        container_name: portainer
+        ports:
+            - '9443:9443'
+            - '8000:8000'
+networks:
+    default:
+        external: true
+        name: caddy
