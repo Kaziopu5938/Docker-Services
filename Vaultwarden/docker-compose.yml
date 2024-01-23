@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+    server:
+        container_name: vaultwarden
+        volumes:
+            - '/docker/vaultwarden:/data/'
+        environment:
+            - SIGNUPS_ALLOWED=true
+            - ADMIN_TOKEN=randomPassword40characters
+        ports:
+            - '8888:80'
+        image: 'vaultwarden/server:latest'
+        restart: unless-stopped
+        
+networks:
+    default:
+        external: true
+        name: caddy
