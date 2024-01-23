@@ -3,7 +3,7 @@ services:
     server:
         container_name: vaultwarden
         volumes:
-            - '/docker/vaultwarden:/data/'
+            - '/home/opu/docker/vaultwarden/data:/data/'
         environment:
             - SIGNUPS_ALLOWED=true
             - ADMIN_TOKEN=randomPassword40characters
