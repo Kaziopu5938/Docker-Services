@@ -1,0 +1,19 @@
+services:
+  emby:
+    image: lscr.io/linuxserver/emby:latest
+    container_name: emby
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Dhaka
+    volumes:
+      - /path/to/library:/config
+      - /path/to/tvshows:/data/tvshows
+      - /path/to/movies:/data/movies
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+ networks:
+  default:
+    external: true
+    name: caddy
