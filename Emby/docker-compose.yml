@@ -8,12 +8,12 @@ services:
       - TZ=Asia/Dhaka
     volumes:
       - /home/opu/docker/emby/config:/config
-      - /media/server/emby/tvshows:/data/tvshows
+      - /media/server/jellyfin/tvshows:/data/tvshows
       - /media/server/jellyfin/movies:/data/movies
     ports:
       - 8096:8096
     restart: unless-stopped
- networks:
+networks:
   default:
     external: true
     name: caddy
