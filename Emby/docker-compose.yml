@@ -7,9 +7,9 @@ services:
       - PGID=1000
       - TZ=Asia/Dhaka
     volumes:
-      - /path/to/library:/config
-      - /path/to/tvshows:/data/tvshows
-      - /path/to/movies:/data/movies
+      - /home/opu/docker/emby/config:/config
+      - /media/server/emby/tvshows:/data/tvshows
+      - /media/server/jellyfin/movies:/data/movies
     ports:
       - 8096:8096
     restart: unless-stopped
