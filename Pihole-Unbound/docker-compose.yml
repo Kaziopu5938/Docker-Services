@@ -1,0 +1,40 @@
+services:
+  unbound:
+    image: klutchell/unbound
+    container_name: unbound
+    networks:
+      pihole_network:
+        ipv4_address: 172.20.0.2  # Static IP for Unbound
+    volumes:
+      - /root/docker/unbound:/etc/unbound/custom.conf.d  # Mount custom config
+    restart: unless-stopped
+
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    depends_on:
+      - unbound
+    networks:
+      pihole_network:
+        ipv4_address: 172.20.0.3  # Static IP for Pi-hole
+    ports:
+      - "53:53/tcp"      # DNS
+      - "53:53/udp"
+      - "80:80/tcp"      # Web interface
+      #- "443:443/tcp"    # HTTPS (optional)
+    environment:
+      TZ: 'Asia/Dhaka'
+      FTLCONF_webserver_api_password: 'enter your password'
+      PIHOLE_DNS_: '172.20.0.2'  # Use Unbound's static IP as upstream DNS
+    volumes:
+      - '/root/docker/pihole/etc-pihole:/etc/pihole'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+networks:
+  pihole_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24  # Custom subnet for Pi-hole and Unbound
